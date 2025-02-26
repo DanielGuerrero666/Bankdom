@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +31,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  String _currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
   final TextEditingController _moneycontroller = TextEditingController();
   final TextEditingController _expensescontroller = TextEditingController();
 
@@ -55,18 +58,39 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           Expanded(
-            child: Container(
-              color: const Color.fromARGB(255, 95, 147, 202),
-              child: Center(
-                child: Text('Sky'),
-              ),
+            child: Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/bck3.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Text(
+                      'Current Date: $_currentDate', style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
           Expanded(
-            child: Container(
-              color: const Color.fromARGB(0, 0, 0, 0),
-              padding: EdgeInsets.all(16),
+            child: Sizedbox(
+              width: double.infinity,
+              height: double.infinity,
+              child: FittedBox(
+                fit: BoxFit.contain, // Ajusta la imagen manteniendo la proporción
+                child: Image.asset('assets/images/Floor v1.png'),
+                  ),
+                ),
               child: Column(
+                padding: EdgeInsets.all(16),
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -114,9 +138,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ],
-              )
-            ),
-          ),
+              ),
+           ),
         ],
       ), 
     );
